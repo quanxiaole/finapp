@@ -1,0 +1,12 @@
+# monorepo 根级通用忽略（各 app 内可有自己的 .gitignore）
+.DS_Store
+__pycache__/
+*.pyc
+*.log
+.venv/
+.venv312/
+venv/
+
+# SQLite 事务文件（factors.db 本体需提交以保留 go-forward 累积）
+*.db-wal
+*.db-shm

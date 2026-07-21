@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.venv312/
+venv/
+.DS_Store
+*.log
+
+# SQLite 事务文件（factors.db 本体需要提交以保留 go-forward 累积）
+*.db-wal
+*.db-shm
+
+# 只发布 index.json；调试报告不提交
+pipeline/out/report.json
