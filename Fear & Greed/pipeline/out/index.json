@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-23T18:00:15+08:00",
+  "updated_at": "2026-07-24T07:06:22+08:00",
   "indices": {
     "us": {
-      "value": 43.23,
+      "value": 39.6,
       "label": "fear",
       "prev_close": 42.97,
       "week_ago": 41.2,
@@ -291,15 +291,15 @@
       },
       {
         "date": "2026-07-22",
-        "value": 43.23
+        "value": 43.31
       },
       {
         "date": "2026-07-23",
-        "value": 43.23
+        "value": 39.6
       },
       {
         "date": "2026-07-23",
-        "value": 43.23
+        "value": 39.6
       }
     ],
     "cn": [
