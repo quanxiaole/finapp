@@ -191,13 +191,23 @@ IndexRepository ──成功──▶ 写 App Group 共享缓存 ──▶ App /
 
 详细建工程步骤见 [`../ios/README.md`](../ios/README.md)。
 
-### 3.5 已知限制
+### 3.5 模拟器实跑验收（已完成）
+
+Xcode 26.6 / iOS 26.5 模拟器，`xcodebuild` 构建两个 target 零报错零警告，实测：
+
+- 主 App 显示美股 39「恐慌」/ A股 16「极度恐慌」，与线上 index.json 一致；
+- 首次安装无本地缓存即能取数，证明 URLSession → raw.githubusercontent 链路通；
+- `Containers/Shared/AppGroup/<id>/index_snapshot.json` 已生成，证明 App Group
+  entitlement 生效且共享缓存写入正常；
+- `FearGreedWidget.appex` 正确嵌入 `PlugIns/`，扩展点 `com.apple.widgetkit-extension`。
+
+### 3.6 已知限制
 
 - **真机需付费账号**：App Group 在模拟器免费可用，真机签名需 $99 开发者账号（M3/M4）。
 - **组件刷新非精确**：`.after` 只保证不早于，系统按电量与使用频率节流。
 - **A股低置信提示会持续存在**：`coverage` 目前 0.65，因 `breadth` / `limit_sentiment`
   只能向前累积历史，满两年前 UI 会一直显示「因子覆盖 65%」。
-- **Xcode 工程壳需手工建**：`.xcodeproj` 未纳入仓库，按 README 步骤生成。
+- **未做 App 图标与资源目录**：MVP 阶段无 asset catalog，主屏图标为默认白底（M3 补）。
 
 ---
 
@@ -220,8 +230,8 @@ IndexRepository ──成功──▶ 写 App Group 共享缓存 ──▶ App /
 - [x] M2c `IndexRepository` + App Group 共享缓存 + 三层降级
 - [x] M2d SwiftUI 双市场仪表盘 + 下拉刷新 + `reloadAllTimelines`
 - [x] M2e WidgetKit Small×2 / Medium×1 + `.after(30min)` 时间线
-- [x] M2b 入口文件 + 建工程逐步指引（[`../ios/README.md`](../ios/README.md)）
-- [ ] M2b 在 Xcode 中建壳并跑通模拟器 — **待装 Xcode 后手工执行**
+- [x] M2b Xcode 工程（App + Widget Extension + App Group + 本地包），模拟器实跑通过
+- [ ] 把小组件加到主屏验收 — 需手工 3 步（见 [`../ios/README.md`](../ios/README.md)）
 
 ## 6. 模块索引
 - `pipeline/storage.py` — SQLite 存储（一因子一表 + meta）

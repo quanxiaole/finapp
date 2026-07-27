@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000120000000000000000A /* FearGreedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000100000000000000000A /* FearGreedApp.swift */; };
+		AA000121000000000000000A /* FearGreedWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000101000000000000000A /* FearGreedWidgetBundle.swift */; };
+		AA000090000000000000000A /* FearGreedUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA000081000000000000000A /* FearGreedUI */; };
+		AA000091000000000000000A /* FearGreedUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA000082000000000000000A /* FearGreedUI */; };
+		AA000092000000000000000A /* FearGreedWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA000021000000000000000A /* FearGreedWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA0000A1000000000000000A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA000001000000000000000A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA000011000000000000000A;
+			remoteInfo = FearGreedWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA000043000000000000000A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AA000092000000000000000A /* FearGreedWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA000020000000000000000A /* FearGreed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FearGreed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA000021000000000000000A /* FearGreedWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FearGreedWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA000100000000000000000A /* FearGreedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FearGreedApp.swift; sourceTree = "<group>"; };
+		AA000101000000000000000A /* FearGreedWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FearGreedWidgetBundle.swift; sourceTree = "<group>"; };
+		AA000102000000000000000A /* FearGreed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FearGreed.entitlements; sourceTree = "<group>"; };
+		AA000103000000000000000A /* FearGreedWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FearGreedWidget.entitlements; sourceTree = "<group>"; };
+		AA000104000000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA000041000000000000000A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000090000000000000000A /* FearGreedUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000051000000000000000A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000091000000000000000A /* FearGreedUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA000002000000000000000A = {
+			isa = PBXGroup;
+			children = (
+				AA000110000000000000000A /* App */,
+				AA000111000000000000000A /* Widget */,
+				AA000003000000000000000A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA000003000000000000000A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000020000000000000000A /* FearGreed.app */,
+				AA000021000000000000000A /* FearGreedWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA000110000000000000000A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA000100000000000000000A /* FearGreedApp.swift */,
+				AA000102000000000000000A /* FearGreed.entitlements */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA000111000000000000000A /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				AA000101000000000000000A /* FearGreedWidgetBundle.swift */,
+				AA000103000000000000000A /* FearGreedWidget.entitlements */,
+				AA000104000000000000000A /* Info.plist */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA000010000000000000000A /* FearGreed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000061000000000000000A /* Build configuration list for PBXNativeTarget "FearGreed" */;
+			buildPhases = (
+				AA000040000000000000000A /* Sources */,
+				AA000041000000000000000A /* Frameworks */,
+				AA000042000000000000000A /* Resources */,
+				AA000043000000000000000A /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000A0000000000000000A /* PBXTargetDependency */,
+			);
+			name = FearGreed;
+			packageProductDependencies = (
+				AA000081000000000000000A /* FearGreedUI */,
+			);
+			productName = FearGreed;
+			productReference = AA000020000000000000000A /* FearGreed.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA000011000000000000000A /* FearGreedWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000062000000000000000A /* Build configuration list for PBXNativeTarget "FearGreedWidget" */;
+			buildPhases = (
+				AA000050000000000000000A /* Sources */,
+				AA000051000000000000000A /* Frameworks */,
+				AA000052000000000000000A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FearGreedWidget;
+			packageProductDependencies = (
+				AA000082000000000000000A /* FearGreedUI */,
+			);
+			productName = FearGreedWidget;
+			productReference = AA000021000000000000000A /* FearGreedWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA000001000000000000000A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					AA000010000000000000000A = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					AA000011000000000000000A = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = AA000060000000000000000A /* Build configuration list for PBXProject "FearGreed" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = AA000002000000000000000A;
+			packageReferences = (
+				AA000080000000000000000A /* XCLocalSwiftPackageReference "FearGreedCore" */,
+			);
+			productRefGroup = AA000003000000000000000A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA000010000000000000000A /* FearGreed */,
+				AA000011000000000000000A /* FearGreedWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA000042000000000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000052000000000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA000040000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000120000000000000000A /* FearGreedApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000050000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000121000000000000000A /* FearGreedWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA0000A0000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA000011000000000000000A /* FearGreedWidget */;
+			targetProxy = AA0000A1000000000000000A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA000070000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA000071000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA000072000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/FearGreed.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "恐慌指数";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanxiaole.feargreed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA000073000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/FearGreed.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "恐慌指数";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanxiaole.feargreed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA000074000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/FearGreedWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "恐慌指数";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanxiaole.feargreed.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA000075000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/FearGreedWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "恐慌指数";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanxiaole.feargreed.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000060000000000000000A /* Build configuration list for PBXProject "FearGreed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000070000000000000000A /* Debug */,
+				AA000071000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000061000000000000000A /* Build configuration list for PBXNativeTarget "FearGreed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000072000000000000000A /* Debug */,
+				AA000073000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000062000000000000000A /* Build configuration list for PBXNativeTarget "FearGreedWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000074000000000000000A /* Debug */,
+				AA000075000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AA000080000000000000000A /* XCLocalSwiftPackageReference "FearGreedCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FearGreedCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA000081000000000000000A /* FearGreedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FearGreedUI;
+		};
+		AA000082000000000000000A /* FearGreedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FearGreedUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AA000001000000000000000A /* Project object */;
+}

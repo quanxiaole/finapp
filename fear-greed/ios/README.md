@@ -4,12 +4,13 @@
 
 ```
 ios/
+├── FearGreed.xcodeproj         工程（App + Widget Extension 两个 target）
 ├── FearGreedCore/              SwiftPM 包，全部业务代码都在这
 │   ├── Sources/FearGreedCore/  模型 / 解码 / 展示格式化 / 端点常量
 │   ├── Sources/FearGreedUI/    数据层 + SwiftUI 视图 + 小组件
 │   └── Tests/                  41 个单测，`swift test` 即可跑
-├── App/FearGreedApp.swift      主 App 入口（加进 Xcode App target）
-├── Widget/FearGreedWidgetBundle.swift  组件入口（加进 Widget target）
+├── App/                        主 App target：@main 入口 + entitlements
+├── Widget/                     Widget target：@main 入口 + entitlements + Info.plist
 └── tools/RenderPreview/        把界面离屏渲染成 PNG 的开发工具
 ```
 
@@ -30,80 +31,46 @@ open /tmp/fg-preview
 
 ---
 
-## 建 Xcode 工程（M2b）
+## 跑起来
 
-装好 Xcode 后按下面步骤操作。全程约 10 分钟。
+工程已经建好并验证过，直接开：
 
-### 1. 新建工程
-
-`File → New → Project… → iOS → App`，填：
-
-| 字段 | 值 |
-|---|---|
-| Product Name | `FearGreed` |
-| Organization Identifier | `com.quanxiaole` |
-| Interface | SwiftUI |
-| Language | Swift |
-| Storage | None |
-| Include Tests | 不勾（单测在 SwiftPM 包里） |
-
-保存位置选 `finapps/fear-greed/ios/`，**不要**勾 Create Git repository（仓库已在 `finapps` 根）。
-
-建完把 Deployment Target 改成 **iOS 17.0**（选中 project → target `FearGreed` → General → Minimum Deployments）。
-
-### 2. 加 Widget Extension
-
-`File → New → Target… → iOS → Widget Extension`：
-
-- Product Name: `FearGreedWidget`
-- **取消勾选** Include Configuration App Intent（MVP 用静态组件，不做配置界面）
-- 弹出 "Activate scheme?" 选 **Activate**
-
-### 3. 两个 target 都加 App Group
-
-对 `FearGreed` 和 `FearGreedWidget` **各做一次**：
-
-选中 target → `Signing & Capabilities` → `+ Capability` → 搜 `App Groups` → 点 `+` 添加：
-
-```
-group.com.quanxiaole.feargreed
+```bash
+open fear-greed/ios/FearGreed.xcodeproj
 ```
 
-这个字符串必须与 `Sources/FearGreedCore/Endpoint.swift` 里的 `appGroupID` 完全一致，否则 App 与组件读不到同一份缓存。
+选 iPhone 模拟器 → `Cmd+R`。命令行等价写法：
 
-### 4. 引入本地 SwiftPM 包
+```bash
+cd fear-greed/ios
+xcodebuild build -project FearGreed.xcodeproj -scheme FearGreed \
+  -destination 'platform=iOS Simulator,name=iPhone 17' -derivedDataPath /tmp/fg-dd
+xcrun simctl boot "iPhone 17"; open -a Simulator
+xcrun simctl install booted /tmp/fg-dd/Build/Products/Debug-iphonesimulator/FearGreed.app
+xcrun simctl launch booted com.quanxiaole.feargreed
+```
 
-`File → Add Package Dependencies… → Add Local…`，选 `fear-greed/ios/FearGreedCore` 目录。
+### 工程配置速查
 
-然后给**两个 target** 都链接产物：target → General → Frameworks, Libraries, and Embedded Content → `+` → 选 `FearGreedUI`（它会自动带上 `FearGreedCore`）。
-
-### 5. 替换入口文件
-
-Xcode 会自动生成一批模板文件，删掉这些：
-
-- `FearGreed/ContentView.swift`
-- `FearGreed/FearGreedApp.swift`
-- `FearGreedWidget/FearGreedWidget.swift`
-- `FearGreedWidget/AppIntent.swift`（如果有）
-
-然后把仓库里写好的两个入口文件拖进去（勾 Copy items if needed，注意 Target Membership 别选错）：
-
-| 文件 | 加到哪个 target |
+| 项 | 值 |
 |---|---|
-| `ios/App/FearGreedApp.swift` | `FearGreed` |
-| `ios/Widget/FearGreedWidgetBundle.swift` | `FearGreedWidget` |
+| App bundle ID | `com.quanxiaole.feargreed` |
+| Widget bundle ID | `com.quanxiaole.feargreed.widget` |
+| App Group | `group.com.quanxiaole.feargreed`（两个 target 都已配） |
+| 最低系统 | iOS 17.0 |
+| 依赖 | 本地 SwiftPM 包 `FearGreedCore`，两个 target 都链接 `FearGreedUI` 产物 |
 
-### 6. 跑起来
+App Group 字符串必须与 `Sources/FearGreedCore/Endpoint.swift` 里的 `appGroupID` 一致，
+否则 App 与组件读不到同一份缓存。
 
-选模拟器（iPhone 15 及以上，iOS 17+）→ `Cmd+R`。
+### 已验证
 
-验收清单：
-
-- [ ] 主 App 显示美股 / A股两张卡片，数值与 [线上 index.json](https://raw.githubusercontent.com/quanxiaole/finapp/main/fear-greed/pipeline/out/index.json) 一致
-- [ ] 下拉可刷新，更新时间跟着变
-- [ ] 长按主屏 → 编辑 → 添加组件，能看到「A股 / 美股 / 双市场 恐慌指数」三项
-- [ ] Small 与 Medium 加到主屏，数值与主 App 一致
-- [ ] 关掉网络（模拟器 → Features → Network Link Conditioner，或直接断开 Mac 网络）重开 App，仍显示上次数据 + 「刷新失败」提示，不白屏
+- [x] `xcodebuild` 构建两个 target，零报错零警告
+- [x] 模拟器运行，双市场卡片数值与[线上 index.json](https://raw.githubusercontent.com/quanxiaole/finapp/main/fear-greed/pipeline/out/index.json) 一致
+- [x] 首次安装无缓存时能联网取数（证明 URLSession 链路通）
+- [x] App Group 容器已创建、共享缓存文件已写入（证明 entitlement 生效）
+- [x] `FearGreedWidget.appex` 正确嵌入 `FearGreed.app/PlugIns/`，扩展点为 `com.apple.widgetkit-extension`
+- [ ] 把组件加到主屏 —— 需手动 3 步：长按主屏空白 → 左上角 `+` → 搜「恐慌指数」→ 选 Small/Medium → Add Widget
 
 ### 不需要做的事
 
