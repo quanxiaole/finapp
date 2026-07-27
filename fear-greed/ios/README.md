@@ -70,6 +70,8 @@ App Group 字符串必须与 `Sources/FearGreedCore/Endpoint.swift` 里的 `appG
 - [x] 首次安装无缓存时能联网取数（证明 URLSession 链路通）
 - [x] App Group 容器已创建、共享缓存文件已写入（证明 entitlement 生效）
 - [x] `FearGreedWidget.appex` 正确嵌入 `FearGreed.app/PlugIns/`，扩展点为 `com.apple.widgetkit-extension`
+- [x] `pluginkit -mv -p com.apple.widgetkit-extension` 能查到 `com.quanxiaole.feargreed.widget`，即组件库可见
+- [x] App 图标已生成（`tools/RenderPreview` 渲染 1024×1024，复用 `GaugeView`）
 - [ ] 把组件加到主屏 —— 需手动 3 步：长按主屏空白 → 左上角 `+` → 搜「恐慌指数」→ 选 Small/Medium → Add Widget
 
 ### 不需要做的事

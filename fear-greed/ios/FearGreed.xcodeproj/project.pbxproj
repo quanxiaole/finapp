@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA000120000000000000000A /* FearGreedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000100000000000000000A /* FearGreedApp.swift */; };
 		AA000121000000000000000A /* FearGreedWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000101000000000000000A /* FearGreedWidgetBundle.swift */; };
+		AA000122000000000000000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000105000000000000000A /* Assets.xcassets */; };
 		AA000090000000000000000A /* FearGreedUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA000081000000000000000A /* FearGreedUI */; };
 		AA000091000000000000000A /* FearGreedUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA000082000000000000000A /* FearGreedUI */; };
 		AA000092000000000000000A /* FearGreedWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA000021000000000000000A /* FearGreedWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -46,6 +47,7 @@
 		AA000102000000000000000A /* FearGreed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FearGreed.entitlements; sourceTree = "<group>"; };
 		AA000103000000000000000A /* FearGreedWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FearGreedWidget.entitlements; sourceTree = "<group>"; };
 		AA000104000000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000105000000000000000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				AA000100000000000000000A /* FearGreedApp.swift */,
+				AA000105000000000000000A /* Assets.xcassets */,
 				AA000102000000000000000A /* FearGreed.entitlements */,
 			);
 			path = App;
@@ -196,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA000122000000000000000A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@
 		AA000072000000000000000A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/FearGreed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -321,6 +326,7 @@
 		AA000073000000000000000A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/FearGreed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

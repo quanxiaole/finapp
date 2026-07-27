@@ -65,6 +65,24 @@ struct DashboardPreview: View {
     }
 }
 
+/// App 图标：直接复用仪表盘造型，保证图标与界面是同一套视觉语言。
+/// 不放数字和文字 —— 在主屏 60pt 尺寸下完全读不出来。
+struct AppIconView: View {
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [Color(red: 0.12, green: 0.13, blue: 0.17),
+                         Color(red: 0.05, green: 0.05, blue: 0.08)],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+            GaugeView(fraction: 0.22, value: "", label: nil,
+                      tint: SentimentPalette.color(for: .extremeFear))
+                .frame(width: 840)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+}
+
 /// 管道降级时的样子：数值为 null + stale，用来确认不会白屏或塌陷。
 let degraded = IndexSnapshot(
     schemaVersion: 1, updatedAt: snapshot.updatedAt,
@@ -73,6 +91,17 @@ let degraded = IndexSnapshot(
 )
 
 MainActor.assumeIsolated {
+    // 图标要 1x 输出 1024，故单独降 scale。
+    let iconRenderer = ImageRenderer(content: AppIconView().frame(width: 1024, height: 1024))
+    iconRenderer.scale = 1
+    if let image = iconRenderer.nsImage, let tiff = image.tiffRepresentation,
+       let rep = NSBitmapImageRep(data: tiff),
+       let png = rep.representation(using: .png, properties: [:]) {
+        let url = outputDir.appendingPathComponent("AppIcon.png")
+        try? png.write(to: url)
+        print("✅ AppIcon.png  1024×1024  \(png.count) bytes")
+    }
+
     render(DashboardPreview(snapshot: snapshot), size: CGSize(width: 393, height: 760),
            to: "dashboard.png")
 
