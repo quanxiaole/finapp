@@ -14,7 +14,7 @@
    Python + AKShare/CNN → 分位合成 → index.json
         │ commit / upload
         ▼
-② 存 (静态托管 + CDN: GitHub Pages / jsDelivr, 接法A)
+② 存 (静态托管: raw.githubusercontent, max-age=300, 见 2.7)
         │ HTTPS GET (CDN 缓存)
         ▼
 ③ 取 (iOS App: SwiftUI + WidgetKit, 无后端, 只消费一个 JSON)
@@ -117,20 +117,96 @@ CREATE TABLE meta (
 ### 2.6 M1d CI/CD 与静态托管（接法 A 优先）
 - `.github/workflows/pipeline.yml`：cron 错峰（07:35 UTC A股盘后 / 22:05 UTC 美股盘后）→ setup-python 3.12 → 装依赖 → `python main.py` → commit `pipeline/out/index.json` + `pipeline/data/factors.db` 回仓库。
 - `factors.db` 一并提交：保留 go-forward 因子（breadth/limit_sentiment）的每日累积，避免重建丢失。
-- 对外 URL（零配置，公开仓库即可）：
-  - jsDelivr：`https://cdn.jsdelivr.net/gh/<user>/<repo>@main/pipeline/out/index.json`
-  - 或 GitHub Pages（需开 Pages）。
 - 保活：每日 commit 天然规避「公开仓库 60 天无活动自动禁用」。
-- **本地验收（已完成）**：CI 入口命令 `python main.py` 本地实跑通过（增量幂等、US+CN 合成、90 天历史、无告警）；YAML 合法。
-- **待远端激活**：需把仓库推到 GitHub（当前仅本地 git，无 remote）后，Actions 才会真正按 cron 运行并 push。
+- **验收（已达成）**：仓库 `github.com/quanxiaole/finapp` 已上线，CI 按 cron 自动运行并提交（已观察到 7 次 `data: 自动更新 index.json`）。
+
+### 2.7 数据分发 URL（M2-1 决策）
+
+**生产 URL（客户端使用）**：
+
+```
+https://raw.githubusercontent.com/quanxiaole/finapp/main/fear-greed/pipeline/out/index.json
+```
+
+选型依据（实测 `curl -I`）：
+
+| 方案 | cache-control | 结论 |
+|---|---|---|
+| raw.githubusercontent.com | `max-age=300`（5 分钟） | ✅ 采用，TTL 远小于 30 分钟刷新间隔 |
+| jsDelivr `@main` | `max-age=604800` + `s-maxage=43200` | ❌ 客户端缓存 7 天，小组件会长期显示过期数据 |
+| GitHub Pages | 短 TTL，正规静态托管 | 可选升级（需在仓库 Settings 手动开启） |
+
+注：目录已由 `Fear & Greed` 改名为 `fear-greed`（M2-0），避免 URL 出现 `%20%26` 转义。
 
 ---
 
-## 3. 不在当前范围
-- iOS 代码（M2 起）、Tip Jar、上架素材、港股 Phase 2、APNs 推送。
+## 3. iOS App MVP (M2)
+
+### 3.1 分层与取舍
+
+```
+FearGreedCore (SwiftPM)      模型 / 防御式解码 / 展示格式化 / 端点常量
+        ▲
+FearGreedUI   (SwiftPM)      IndexRepository + App Group 缓存 + SwiftUI 视图 + WidgetKit
+        ▲                    （App 与 Widget Extension 共用）
+   ┌────┴────┐
+App target   Widget target   只放 @main，各约 10 行
+```
+
+**关键决策：业务代码全部放 SwiftPM 包，Xcode target 只留 `@main`。**
+直接收益是本机（只有 Command Line Tools、无 Xcode）就能编译、跑单测、把界面渲染成
+PNG 看效果；Xcode 仅在跑模拟器和上架时才必需。代价是 Xcode 里多一步添加本地包依赖。
+
+### 3.2 数据流与降级
+
+```
+raw.githubusercontent (max-age=300)
+   │ URLSession，15s 超时，reloadRevalidatingCacheData 走 ETag
+   ▼
+IndexRepository ──成功──▶ 写 App Group 共享缓存 ──▶ App / Widget
+   └──失败──▶ 读共享缓存 ──▶ 标记 isFromCache + 失败原因
+              └──无缓存──▶ SnapshotLoadError.offlineWithoutCache（空态 + 重试按钮）
+```
+
+三层降级都有单测覆盖：网络失败回退缓存、坏 JSON 回退缓存、首启无缓存才报错。
+
+### 3.3 小组件
+
+| 组件 | 尺寸 | 内容 |
+|---|---|---|
+| `CNIndexWidget` | Small | A股仪表盘 + 较昨收 |
+| `USIndexWidget` | Small | 美股仪表盘 + 较昨收 |
+| `DualMarketWidget` | Medium | 双市场并排 + 各自 7 日趋势 |
+
+三个静态组件而非一个可配置组件：MVP 省掉 AppIntent 配置界面，用户在组件库直接挑。
+时间线策略 `.after(30 分钟)` ≈ 48 次/天，落在系统 40–70 次预算内（系统仍会按电量节流，
+是「不早于」而非精确定时）。
+
+### 3.4 无 Xcode 的验收手段
+
+- `swift test` — 41 个单测（解码 / 展示格式化 / 数据层 / ViewModel / 时间线）。
+- `tools/RenderPreview` — 用 `ImageRenderer` 把视图离屏渲染成 PNG，无需模拟器。
+  已借此发现并修掉两个真实布局缺陷：仪表指针横穿数字（改为弧上圆点）、
+  走势线固定 0–100 量程被压成直线（改为自适应量程）。
+
+详细建工程步骤见 [`../ios/README.md`](../ios/README.md)。
+
+### 3.5 已知限制
+
+- **真机需付费账号**：App Group 在模拟器免费可用，真机签名需 $99 开发者账号（M3/M4）。
+- **组件刷新非精确**：`.after` 只保证不早于，系统按电量与使用频率节流。
+- **A股低置信提示会持续存在**：`coverage` 目前 0.65，因 `breadth` / `limit_sentiment`
+  只能向前累积历史，满两年前 UI 会一直显示「因子覆盖 65%」。
+- **Xcode 工程壳需手工建**：`.xcodeproj` 未纳入仓库，按 README 步骤生成。
+
+---
+
+## 4. 不在当前范围
+- Swift Charts 历史图表、锁屏 accessory 组件、Tip Jar、上架素材（M3）。
+- 港股、APNs 推送（Phase 2）。
 - 权重回测调参（v1 用启发式，M1b 仅做合理性校验，不做最优化）。
 
-## 4. 任务清单（对应 plan todos）
+## 5. 任务清单（对应 plan todos）
 - [x] M1a 逐因子数据源与回填可行性核实（`probe_sources.py`）
 - [x] M1a SQLite 存储 schema（`storage.py`）
 - [x] M1a backfill.py + 回填（5 因子 2 年+；breadth/limit go-forward）
@@ -138,8 +214,16 @@ CREATE TABLE meta (
 - [x] M1b 产出 cn.history 90 天 + 合理性校验（`validate.py`，corr=+0.78）
 - [x] M1c index.json schema + 错峰调度 + 数据质量告警（`main.py`）
 - [x] M1d GitHub Actions + 静态托管（`.github/workflows/pipeline.yml`，本地验收通过）
+- [x] M2-0 目录改名 `Fear & Greed` → `fear-greed` + CI 路径同步
+- [x] M2-1 分发 URL 定型（raw，`max-age=300`，见 2.7）
+- [x] M2a 核心层 `FearGreedCore` + 22 个单测
+- [x] M2c `IndexRepository` + App Group 共享缓存 + 三层降级
+- [x] M2d SwiftUI 双市场仪表盘 + 下拉刷新 + `reloadAllTimelines`
+- [x] M2e WidgetKit Small×2 / Medium×1 + `.after(30min)` 时间线
+- [x] M2b 入口文件 + 建工程逐步指引（[`../ios/README.md`](../ios/README.md)）
+- [ ] M2b 在 Xcode 中建壳并跑通模拟器 — **待装 Xcode 后手工执行**
 
-## 5. 模块索引
+## 6. 模块索引
 - `pipeline/storage.py` — SQLite 存储（一因子一表 + meta）
 - `pipeline/net.py` — 网络重试（网络错误退避、ValueError 不重试）
 - `pipeline/factor_defs.py` — 因子原始值单一定义源（回填/实时共用）
@@ -150,3 +234,12 @@ CREATE TABLE meta (
 - `pipeline/validate.py` — 指数合理性校验
 - `pipeline/test_compute.py` — 单元测试
 - `pipeline/probe_sources.py` — 数据源可行性探测
+
+iOS：
+
+- `ios/FearGreedCore/Sources/FearGreedCore/` — 模型、防御式解码、展示格式化、端点常量
+- `ios/FearGreedCore/Sources/FearGreedUI/` — 数据层（`IndexRepository` / `SnapshotCache`）、
+  视图（`DashboardView` / `MarketCardView` / `GaugeView` / `SparklineView`）、
+  小组件（`Widgets` / `WidgetTimeline` / `WidgetViews`）
+- `ios/App/`、`ios/Widget/` — 两个 Xcode target 的 `@main` 入口
+- `ios/tools/RenderPreview/` — 离屏渲染 PNG 的开发期工具

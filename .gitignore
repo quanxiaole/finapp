@@ -10,3 +10,10 @@ venv/
 # SQLite 事务文件（factors.db 本体需提交以保留 go-forward 累积）
 *.db-wal
 *.db-shm
+
+# Swift / Xcode
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
