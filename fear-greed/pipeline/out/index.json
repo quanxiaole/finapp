@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-03T18:55:22+08:00",
+  "updated_at": "2026-08-04T07:13:31+08:00",
   "indices": {
     "us": {
-      "value": 45.09,
+      "value": 45.83,
       "label": "neutral",
       "prev_close": 42.46,
       "week_ago": 37.63,
@@ -283,15 +283,15 @@
       },
       {
         "date": "2026-07-31",
-        "value": 45.09
+        "value": 45.23
       },
       {
         "date": "2026-08-03",
-        "value": 45.09
+        "value": 45.83
       },
       {
         "date": "2026-08-03",
-        "value": 45.09
+        "value": 45.83
       }
     ],
     "cn": [
