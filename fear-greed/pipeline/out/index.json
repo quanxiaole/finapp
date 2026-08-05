@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-05T18:08:43+08:00",
+  "updated_at": "2026-08-06T07:11:26+08:00",
   "indices": {
     "us": {
-      "value": 59.17,
+      "value": 59.66,
       "label": "greed",
       "prev_close": 58.17,
       "week_ago": 34.66,
@@ -291,15 +291,15 @@
       },
       {
         "date": "2026-08-04",
-        "value": 59.17
+        "value": 59.97
       },
       {
         "date": "2026-08-05",
-        "value": 59.17
+        "value": 59.66
       },
       {
         "date": "2026-08-05",
-        "value": 59.17
+        "value": 59.66
       }
     ],
     "cn": [
