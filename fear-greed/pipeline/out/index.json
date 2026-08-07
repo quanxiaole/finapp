@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-07T09:32:28+08:00",
+  "updated_at": "2026-08-07T16:34:43+08:00",
   "indices": {
     "us": {
-      "value": 59.71,
+      "value": 59.6,
       "label": "greed",
-      "prev_close": 59.66,
-      "week_ago": 40.71,
+      "prev_close": 59.71,
+      "week_ago": 45.23,
       "stale": false
     },
     "cn": {
@@ -291,11 +291,15 @@
       },
       {
         "date": "2026-08-06",
-        "value": 59.71
+        "value": 59.6
       },
       {
-        "date": "2026-08-06",
-        "value": 59.71
+        "date": "2026-08-07",
+        "value": 59.6
+      },
+      {
+        "date": "2026-08-07",
+        "value": 59.6
       }
     ],
     "cn": [
