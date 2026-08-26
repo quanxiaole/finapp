@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-26T06:36:55+08:00",
+  "updated_at": "2026-08-26T16:08:57+08:00",
   "indices": {
     "us": {
-      "value": 58.8,
+      "value": 59.09,
       "label": "greed",
-      "prev_close": 55.03,
-      "week_ago": 55.09,
+      "prev_close": 58.8,
+      "week_ago": 57.2,
       "stale": false
     },
     "cn": {
-      "value": 18.65,
+      "value": 18.5,
       "label": "extreme_fear",
       "prev_close": 21.14,
       "week_ago": 36.16,
@@ -291,11 +291,15 @@
       },
       {
         "date": "2026-08-25",
-        "value": 58.8
+        "value": 59.09
       },
       {
-        "date": "2026-08-25",
-        "value": 58.8
+        "date": "2026-08-26",
+        "value": 59.09
+      },
+      {
+        "date": "2026-08-26",
+        "value": 59.09
       }
     ],
     "cn": [
@@ -657,7 +661,7 @@
       },
       {
         "date": "2026-08-25",
-        "value": 18.65
+        "value": 18.5
       }
     ]
   }
