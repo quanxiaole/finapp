@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-07T21:38:34+08:00",
+  "updated_at": "2026-09-08T08:11:47+08:00",
   "indices": {
     "us": {
       "value": 41.86,
@@ -10,8 +10,8 @@
       "stale": false
     },
     "cn": {
-      "value": 24.94,
-      "label": "extreme_fear",
+      "value": 25.61,
+      "label": "fear",
       "prev_close": 25.38,
       "week_ago": 37.97,
       "coverage": 0.65,
@@ -653,7 +653,7 @@
       },
       {
         "date": "2026-09-07",
-        "value": 24.94
+        "value": 25.61
       }
     ]
   }
