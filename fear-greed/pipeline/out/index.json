@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T22:53:29+08:00",
+  "updated_at": "2026-10-20T09:01:57+08:00",
   "indices": {
     "us": {
-      "value": 25.26,
-      "label": "fear",
+      "value": 23.11,
+      "label": "extreme_fear",
       "prev_close": 17.94,
       "week_ago": 46.34,
       "stale": false
     },
     "cn": {
-      "value": 20.63,
+      "value": 20.79,
       "label": "extreme_fear",
       "prev_close": 30.82,
       "week_ago": 20.07,
@@ -299,11 +299,11 @@
       },
       {
         "date": "2026-10-19",
-        "value": 25.24
+        "value": 23.11
       },
       {
         "date": "2026-10-19",
-        "value": 25.26
+        "value": 23.11
       }
     ],
     "cn": [
@@ -665,7 +665,7 @@
       },
       {
         "date": "2026-10-19",
-        "value": 20.63
+        "value": 20.79
       }
     ]
   }
