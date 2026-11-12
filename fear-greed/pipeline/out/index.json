@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T23:31:27+08:00",
+  "updated_at": "2026-11-12T10:50:22+08:00",
   "indices": {
     "us": {
-      "value": 36.51,
+      "value": 36.97,
       "label": "fear",
       "prev_close": 33.46,
       "week_ago": 34.17,
       "stale": false
     },
     "cn": {
-      "value": 53.43,
+      "value": 53.82,
       "label": "neutral",
       "prev_close": 54.17,
       "week_ago": 46.16,
@@ -21,10 +21,6 @@
   },
   "history": {
     "us": [
-      {
-        "date": "2026-08-03",
-        "value": 46.14
-      },
       {
         "date": "2026-08-04",
         "value": 58.97
@@ -303,15 +299,15 @@
       },
       {
         "date": "2026-11-10",
-        "value": 36.51
+        "value": 37.37
       },
       {
         "date": "2026-11-11",
-        "value": 36.51
+        "value": 36.97
       },
       {
         "date": "2026-11-11",
-        "value": 36.51
+        "value": 36.97
       }
     ],
     "cn": [
@@ -673,7 +669,7 @@
       },
       {
         "date": "2026-11-11",
-        "value": 53.43
+        "value": 53.82
       }
     ]
   }
